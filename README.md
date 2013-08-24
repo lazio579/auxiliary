@@ -27,14 +27,14 @@ TCPCopy has little influence on the production system except occupying additiona
 * Live testing
   - Prove the new system is stable and find bugs that only occur in the real world
 * Regression testing
-* performance comparison
+* Performance comparison
   - For instance, you can use tcpcopy to [compare the performance of Apache and Nginx](https://raw.github.com/wangbin579/auxiliary/master/docs/Apache%202.4%20vs.%20Nginx%20-%20A%20comparison%20under%20real%20online%20applications.pdf)
     
 
 
 ##Architecture 
 
-There are two kinds of architectures that TCPCopy could be used depending on where to capture response packets.
+There are two ways to use TCPCopy: adopting the traditional framework or using the advanced framework depending on where to capture response packets.
 
 ###Traditional architecture
 ![tcpcopy](https://raw.github.com/wangbin579/auxiliary/master/images/traditional_tcpcopy_archicture.GIF)
@@ -49,7 +49,9 @@ Figure 2 shows the architecture of using TCPCopy to do realistic testing of Inte
 
 ![tcpcopy](https://raw.github.com/wangbin579/auxiliary/master/images/advanced_tcpcopy_archicture.GIF)
 
-As you can see, intercept runs at an independent machine which is different from test server and captues response packets at the data link layer. The only operation involved in test server is adding route commands to route response packets to the machine which runs the TCPCopy server. All these changes lead to more realistic testing because ip queue or nfqueue will not affect the test server. Also the potential of intercept is enhanced because capturing packets in data link is more powerful and multiple instances of intercept could also be supported.
+The difference between the advanced framework and the traditional framework is that intercept runs on a separate machine instead of the test server. Thus, the test tasks will not be influenced by intercept. 
+
+The advanced framework of TCPCopy can be seen in Figure 2. Assume the online server (TCPCopy client) is running online services, test server 1 is used to do the test tasks and test server 2 (TCPCopy server) is adopted to run intercept. The only operation needed in test server 1 for TCPCopy is setting appropriate route commands to route response packets to the test server 2. Intercept at test server 2 captures response packets at the data link layer and passes the response header to TCPCopy client on the online server.  These changes lead to more realistic testing because the test task in test server 1 is no longer influenced by intercept. Moreover, as intercept captures packets more efficiently in data link layer and multiple instances of intercept could run concurrently, the processing ability of intercept is also enhanced.
 
 ![tcpcopy](https://raw.github.com/wangbin579/auxiliary/master/images/advanced_tcpcopy_usage.GIF)
 
