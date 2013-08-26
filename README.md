@@ -140,10 +140,10 @@ Two quick start options are available:
            route add default gw 61.135.233.161
 
 	b) On the assistant server which runs intercept (the TCPCopy server) (root privilege is required):
-	    ./intercept -F <filter> -i <device,> 
+	  ./intercept -F <filter> -i <device,> 
 	
 	c) On the online source server (root privilege is required):
-	    ./tcpcopy -x localServerPort-targetServerIP:targetServerPort -s <intercept server,> -i <device,> 
+	  ./tcpcopy -x localServerPort-targetServerIP:targetServerPort -s <intercept server,> -i <device,> 
 	  
 	Note that the filter format is the same as the pcap filter.
 	For example:
