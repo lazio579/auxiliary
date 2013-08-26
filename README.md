@@ -119,12 +119,12 @@ Two quick start options are available:
         ./intercept
 
     b) on the source host (root privilege is required):
-      sudo ./tcpcopy -x localServerPort-targetServerIP:targetServerPort
+       ./tcpcopy -x localServerPort-targetServerIP:targetServerPort
 
 
 ###Advanced usage guide:
-	Assume TCPCopy with "./configure --enable-advanced --enable-pcap" is configured on the online server 
-	and the assistant server.
+	Assume TCPCopy with "./configure --enable-advanced --enable-pcap" is configured on the online
+	server and the assistant server.
 
 	Run:
 	a) On the target test server which runs test server applications (root privilege is required):
@@ -132,18 +132,18 @@ Two quick start options are available:
 
         For example:
 
-	    Assume 61.135.233.219 is the actual IP address which is the default gateway, while 61.135.233.161
-        is the IP address of the assistant server. We set the following route commands to route all extenal 
-        responses to the assistant server.
+	    Assume 61.135.233.219 is the actual IP address which is the default gateway, while 
+		61.135.233.161 is the IP address of the assistant server. We set the following route 
+		commands to route all extenal responses to the assistant server.
 
            route del default gw 61.135.233.219
            route add default gw 61.135.233.161
 
 	b) On the assistant server which runs intercept (the TCPCopy server) (root privilege is required):
-	    sudo ./intercept -F <filter> -i <device,> 
+	    ./intercept -F <filter> -i <device,> 
 	
 	c) On the online source server (root privilege is required):
-	    sudo ./tcpcopy -x localServerPort-targetServerIP:targetServerPort -s <intercept server,> -i <device,> 
+	    ./tcpcopy -x localServerPort-targetServerIP:targetServerPort -s <intercept server,> -i <device,> 
 	  
 	Note that the filter format is the same as the pcap filter.
 	For example:
